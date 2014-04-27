@@ -1,4 +1,4 @@
-package redis
+package reredis
 
 import (
     "github.com/garyburd/redigo/redis";
@@ -48,6 +48,7 @@ func Init() {
     // configurations
     var (
         found bool
+        redisUrl string
         host string
         port string
         password string
@@ -57,18 +58,29 @@ func Init() {
 
     // set default configirations
 
-    //TODO: add unix url
-    if host, found = revel.Config.String("redis.host"); !found {
-        host = ""
-        revel.WARN.Printf("Redis: redis.host not found")
+
+    var redis_url = 0;
+    //TODO: add unixUrl parser and check
+    if redisUrl, found = revel.Config.String("redis.url"); !found {
+        redisUrl = ""
+        redis_url = 1;
+        revel.INFO.Printf("Redis: redis")
+    } else {
+        redis_url = 0;
     }
-    if port, found = revel.Config.String("redis.port"); !found {
-        port = "6379"
-        revel.WARN.Printf("Redis: redis.port not found")
-    }
-    if password, found = revel.Config.String("redis.password"); !found {
-        password = ""
-        revel.WARN.Printf("Redis: redis.password not found")
+    if redis_url != 1 {
+        if host, found = revel.Config.String("redis.host"); !found {
+            host = ""
+            revel.INFO.Printf("Redis: redis.host not found")
+        }
+        if port, found = revel.Config.String("redis.port"); !found {
+            port = "6379"
+            revel.INFO.Printf("Redis: redis.port not found")
+        }
+        if password, found = revel.Config.String("redis.password"); !found {
+            password = ""
+            revel.INFO.Printf("Redis: redis.password not found")
+        }
     }
 
     url := []string{host, port}
