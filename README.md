@@ -9,9 +9,9 @@ Installation
 go get github.com/alex179ohm/reredigo
 ```
 #### external dependecies
-[revel](https://github.com/revel/revel) #revel app  
-[gocolorize](https://github.com/agtorre/gocolorize) #beauty logs  
-[redigo](https://github.com/garyburd/redigo) #redis client api  
+[revel](https://github.com/revel/revel) #revel app
+[gocolorize](https://github.com/agtorre/gocolorize) #beauty logs
+[redigo](https://github.com/garyburd/redigo) #redis client api
 
 Configuration
 -------------
@@ -88,3 +88,5 @@ func (c App) Index() revel.Result {
 ```
 
 LICENSE:
+Licensed under the BSD 2-clause License (Simplied BSD License)  
+http://opensource.org/licenses/BSD-2-Clause
