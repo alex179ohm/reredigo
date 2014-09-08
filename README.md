@@ -15,9 +15,9 @@ go get github.com/alex179ohm/reredigo
 
 Configuration
 -------------
-few variables are exposed for redis connection and authentication.
-each value expressed is the default configuration.
-default configuration is optimized for a development environment.
+Few variables are exposed for redis connection and authentication.
+each value expressed is the default configuration.  
+Default configuration is optimized for a development environment.
 ```go
 redis.host=""
 // Redis host ip (blank string means localhost)
@@ -56,9 +56,8 @@ redis.timeout=60
 ```
 Usage
 -----
-
-just import the reredigo app package and add the reredigo controller to the application
-controller.
+Just import the reredigo app package and add the reredigo controller to the application
+controller.  
 For the redigo package documentation go to: http://godoc.org/github.com/garyburd/redigo/redis.  
 For Redis documentation: http://redis.io/documentation.  
 ```go
@@ -88,5 +87,4 @@ func (c App) Index() revel.Result {
 ```
 
 LICENSE:
-Licensed under the BSD 2-clause License (Simplied BSD License)  
-http://opensource.org/licenses/BSD-2-Clause
+Licensed under the BSD 2-clause License (Simplied BSD License) http://opensource.org/licenses/BSD-2-Clause
