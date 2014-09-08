@@ -56,7 +56,7 @@ func newPool(proto, server, password string,
 	return &redis.Pool{
 		MaxIdle:     idle,
 		MaxActive:   active,
-		IdleTimeout: timeout * time.Second,
+		IdleTimeout: time.Duration(timeout) * time.Second,
 		Dial: func() (redis.Conn, error) {
 			c, err := redis.Dial(proto, server)
 			if trace {
@@ -99,27 +99,11 @@ func Init() {
 		port     string
 		password string
 		idle     int
+		trace    bool
+		check    bool
 		timeout  int
-		//		active int
-		trace bool
-		check bool
 	)
 
-	//TODO: include a regexp match and REDIS_URL env variable
-
-	// set default configurations
-
-	/*
-	   var redis_url = 0;
-	   //TODO: add unixUrl parser and check
-	   if redisUrl, found = revel.Config.String("redis.url"); !found {
-	       redisUrl = ""
-	       redis_url = 0;
-	       revel.INFO.Printf("Redis: redis")
-	   } else {
-	       redis_url = 1;
-	   }*/
-	//    if redis_url != 1 {
 	if host, found = revel.Config.String("redis.host"); !found {
 		host = ""
 		revel.INFO.Println("Redis: redis.host not found default is localhost")
@@ -132,13 +116,12 @@ func Init() {
 		password = ""
 		revel.INFO.Println("Redis: redis.password not found default is blank string")
 	}
-	//    }
 
 	if idle, found = revel.Config.Int("redis.idle"); !found {
 		idle = 10
 		revel.INFO.Println("REDIS: redis.idle not found, default is 10")
 	}
-	if timeout, found = revel.Config("redis.timeout"); !found {
+	if timeout, found = revel.Config.Int("redis.timeout"); !found {
 		timeout = 240
 		revel.INFO.Println("REDIS: redis.timeout not found, default is 240")
 	}
