@@ -29,7 +29,7 @@ redis.password=""
 // Redis password
 
 redis.trace=true
-// enable redis trace log on stderr usefull on deploy
+// enable redis trace log on stderr usefull on development
 
 redis.check=true
 // Check idle connection after their usge, on failure
