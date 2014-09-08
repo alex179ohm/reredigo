@@ -1,14 +1,26 @@
 REDIS Controller for Revel.
 ========
 
-Simple redis db controller for revel application written on top of [redigo](https://github.com/garyburd/redigo) client.
+Simple redis db controller for revel application written on top of [redigo](https://github.com/garyburd/redigo) client api.
 
-#### CONFIGURATION
-few variables are exposed for correct redis connection and authentication.
+Installation
+------------
+```sh
+go get github.com/alex179ohm/reredigo
+```
+#### external dependecies
+[revel](https://github.com/revel/revel) #revel app  
+[gocolorize](https://github.com/agtorre/gocolorize) #beauty logs  
+[redigo](https://github.com/garyburd/redigo) #redis client api  
+
+Configuration
+-------------
+few variables are exposed for redis connection and authentication.
 each value expressed is the default configuration.
+default configuration is optimized for a development environment.
 ```go
 redis.host=""
-// Redis host ip
+// Redis host ip (blank string means localhost)
 
 redis.port=6379
 // Redis tcp port
@@ -20,16 +32,19 @@ redis.trace=true
 // enable redis trace log on stderr usefull on deploy
 
 redis.check=true
-// Check idle connection after their usage with a simple PING command, on failure
-// close the application.
+// Check idle connection after their usge, on failure
+// close the application. (PING command is used to check connection)
 
 redis.idle=10
-// Max idle connections in Poll, see: http://godoc.org/github.com/garyburd/redigo/redis#Pool.
+// Max idle connections in Poll, see: [Pool](http://godoc.org/github.com/garyburd/redigo/redis#Pool).
 
 redis.timeout=240
 // Expressed in seconds, after this time the idle connection is closed.
 ```
-#### Example production configuration
+#### Example configuration used on production
+NOTE: This is just a configuration example, redis.idle and redis.timeout values
+have to be relative at the connections (respectively number and duration)
+of your specific application.
 ```go
 redis.host=$REDIS_HOST
 redis.port=$REDIS_PORT
@@ -39,7 +54,9 @@ redis.check=false
 redis.idle=3
 redis.timeout=60
 ```
-#### USAGE
+Usage
+-----
+
 just import the reredigo app package and add the reredigo controller to the application
 controller.
 For the redigo package documentation go to: http://godoc.org/github.com/garyburd/redigo/redis.
@@ -69,3 +86,5 @@ func (c App) Index() revel.Result {
 	c.Render()
 }
 ```
+
+LICENSE:
