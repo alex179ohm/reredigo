@@ -1,7 +1,7 @@
 REDIS Controller for Revel.
 ========
 
-Simple redis db controller for revel application.
+Simple redis db controller for revel application written on top of [redigo](https://github.com/garyburd/redigo) client.
 
 #### CONFIGURATION
 few variables are exposed for correct redis connection and authentication.
@@ -24,7 +24,7 @@ redis.check=true
 // close the application.
 
 redis.idle=10
-// Max idle connections for Poll, see: http://godoc.org/github.com/garyburd/redigo/redis#Pool.
+// Max idle connections in Poll, see: http://godoc.org/github.com/garyburd/redigo/redis#Pool.
 
 redis.timeout=240
 // Expressed in seconds, after this time the idle connection is closed.
@@ -42,7 +42,8 @@ redis.timeout=60
 #### USAGE
 just import the reredigo app package and add the reredigo controller to the application
 controller.
-For the redigo package documentation go to: http://godoc.org/github.com/garyburd/redigo/redis
+For the redigo package documentation go to: http://godoc.org/github.com/garyburd/redigo/redis.
+For Redis documentation: http://redis.io/documentation.
 ```go
 import (
 	"github.com/alex179ohm/reredigo/app"
