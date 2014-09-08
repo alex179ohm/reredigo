@@ -9,9 +9,9 @@ Installation
 go get github.com/alex179ohm/reredigo
 ```
 #### external dependecies
-[revel](https://github.com/revel/revel) #revel app
-[gocolorize](https://github.com/agtorre/gocolorize) #beauty logs
-[redigo](https://github.com/garyburd/redigo) #redis client api
+[revel](https://github.com/revel/revel) #revel app  
+[gocolorize](https://github.com/agtorre/gocolorize) #beauty logs  
+[redigo](https://github.com/garyburd/redigo) #redis client api  
 
 Configuration
 -------------
@@ -59,8 +59,8 @@ Usage
 
 just import the reredigo app package and add the reredigo controller to the application
 controller.
-For the redigo package documentation go to: http://godoc.org/github.com/garyburd/redigo/redis.
-For Redis documentation: http://redis.io/documentation.
+For the redigo package documentation go to: http://godoc.org/github.com/garyburd/redigo/redis.  
+For Redis documentation: http://redis.io/documentation.  
 ```go
 import (
 	"github.com/alex179ohm/reredigo/app"
