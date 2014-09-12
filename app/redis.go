@@ -63,6 +63,7 @@ func newPool(proto, server, password string,
 				c = redis.NewLoggingConn(c, redisLog, "")
 			}
 			if err != nil {
+                revel.ERROR.Println("Redis connection Failed")
 				return nil, err
 			}
 			if len(password) > 0 {
