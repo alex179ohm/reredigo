@@ -27,7 +27,7 @@
 //of the authors and should not be interpreted as representing official policies,
 //either expressed or implied, of the FreeBSD Project.
 
-package reredis
+package redis
 
 import (
 	"github.com/agtorre/gocolorize"
@@ -42,6 +42,11 @@ import (
 var (
 	pool *redis.Pool
 )
+
+type Redis struct {
+    *revel.Controller
+    Pool *redis.Pool
+}
 
 func newPool(proto, server, password string,
 	idle, active, timeout int,
@@ -63,7 +68,6 @@ func newPool(proto, server, password string,
 				c = redis.NewLoggingConn(c, redisLog, "")
 			}
 			if err != nil {
-                revel.ERROR.Println("Redis connection Failed")
 				return nil, err
 			}
 			if len(password) > 0 {
@@ -140,17 +144,12 @@ func Init() {
 	pool = newPool("tcp", strings.Join(url, ":"), password, idle, 0, timeout, trace, check)
 }
 
-type RedisController struct {
-	*revel.Controller
-	Pool *redis.Pool
-}
-
-func (c *RedisController) Begin() revel.Result {
-	c.Pool = pool
-	return nil
+func (c Redis) Begin() revel.Result {
+    c.Pool = pool
+    return nil
 }
 
 func init() {
 	revel.OnAppStart(Init)
-	revel.InterceptMethod((*RedisController).Begin, revel.BEFORE)
+    revel.InterceptMethod((*Redis).Begin, revel.BEFORE)
 }

@@ -56,9 +56,9 @@ redis.timeout=60
 ```
 Usage
 -----
-Just import the reredigo app package and add the reredigo controller to the application
+Just import the reredigo app package and add the redis.Redis controller to your application
 controller.  
-For the redigo package documentation go to: http://godoc.org/github.com/garyburd/redigo/redis.  
+For redigo package documentation see: http://godoc.org/github.com/garyburd/redigo/redis.  
 For Redis documentation: http://redis.io/documentation.  
 ```go
 import (
@@ -68,11 +68,11 @@ import (
 
 type App struct {
 	*revel.Controller
-	reredis.RedisController
+	redis.Redis
 }
 
 func (c App) Index() revel.Result {
-	connRedis = c.Pool.Get()
+	connRedis := c.Pool.Get()
 	defer connRedis.Close()
 
 	connRedis.Do("SET", "foo", "bar")
